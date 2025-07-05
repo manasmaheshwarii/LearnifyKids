@@ -19,7 +19,7 @@ export const courses: Course[] = [
         id: "what-is-money",
         title: "What is Money?",
         type: "video",
-        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", // Kids learn about money basics
+        videoUrl: "https://www.youtube.com/watch?v=GZ7y-yFdX9M", // Kids learn what is money
         duration: "8 minutes",
         description:
           "Discover what money is and why it's important in our daily lives",
@@ -148,7 +148,8 @@ export const courses: Course[] = [
         id: "finding-your-voice",
         title: "Finding Your Voice",
         type: "video",
-        videoUrl: "9OhXJjFEBjA", // Public speaking for kids
+        videoUrl:
+          "https://www.youtube.com/watch?v=Rkb-QmuA9Vw&list=PLSnPZxJoBf9OZl_nuB6pcxSX5e2qOd-20&index=11", // Public speaking for kids
         duration: "10 minutes",
         description: "Learn how to project your voice and speak clearly",
       },
