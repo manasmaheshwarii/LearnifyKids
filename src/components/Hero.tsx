@@ -94,3 +94,5 @@ export const Hero: React.FC<HeroProps> = ({
     </section>
   );
 };
+
+// CHANGING UI VIA PERPLEXITY

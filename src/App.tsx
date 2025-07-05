@@ -10,6 +10,8 @@ import { Login } from "./components/Login";
 import { CourseDetail } from "./components/CourseDetail";
 import { VideoPlayer } from "./components/VideoPlayer";
 import { Quiz } from "./components/Quiz";
+import { GameModule } from "./components/GameModule";
+import { CertificateModule } from "./components/CertificateModule";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { courses as initialCourses } from "./data/courses";
 
@@ -42,7 +44,6 @@ function App() {
     }
   };
 
-  // NEW: Handle category click to show only that category's courses
   const handleCategoryClick = (categoryId: string) => {
     setState({
       ...state,
@@ -73,7 +74,6 @@ function App() {
     }
   };
 
-  // Mark module as complete in state
   const handleModuleComplete = () => {
     setCourses((prevCourses) =>
       prevCourses.map((course) => {
@@ -180,6 +180,25 @@ function App() {
           return (
             <Quiz
               questions={selectedModule.quizQuestions || []}
+              onComplete={handleModuleComplete}
+              onBack={handleBackToCourse}
+            />
+          );
+        } else if (selectedModule.type === "game") {
+          return (
+            <GameModule
+              title={selectedModule.title}
+              description={selectedModule.description}
+              onComplete={handleModuleComplete}
+              onBack={handleBackToCourse}
+            />
+          );
+        } else if (selectedModule.type === "certificate") {
+          return (
+            <CertificateModule
+              title={selectedModule.title}
+              description={selectedModule.description}
+              downloadUrl={selectedModule.downloadUrl}
               onComplete={handleModuleComplete}
               onBack={handleBackToCourse}
             />
