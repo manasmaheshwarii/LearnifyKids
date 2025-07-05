@@ -8,12 +8,14 @@ interface CoursesProps {
   onCourseClick: (courseId: string) => void;
   selectedCategory?: string;
   onCategoryChange?: (categoryId: string) => void;
+  onBack?: () => void; // NEW
 }
 
 export const Courses: React.FC<CoursesProps> = ({
   onCourseClick,
   selectedCategory,
   onCategoryChange,
+  onBack,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDifficulty, setSelectedDifficulty] = useState("all");
@@ -33,6 +35,32 @@ export const Courses: React.FC<CoursesProps> = ({
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Back Button (only if filtered by category) */}
+        {selectedCategory && onBack && (
+          <div className="mb-6">
+            <button
+              onClick={onBack}
+              className="flex items-center space-x-2 text-purple-600 hover:text-purple-800 font-semibold px-4 py-2 rounded-full bg-purple-50 hover:bg-purple-100 transition-colors"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+              <span>Back</span>
+            </button>
+          </div>
+        )}
+
+        {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-200 mb-2 transition-colors duration-300">
             {selectedCategory
@@ -47,8 +75,10 @@ export const Courses: React.FC<CoursesProps> = ({
           </p>
         </div>
 
+        {/* Search and Filters */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 mb-8 transition-colors duration-300">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Search */}
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5 transition-colors duration-300" />
               <input
@@ -59,6 +89,8 @@ export const Courses: React.FC<CoursesProps> = ({
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-colors duration-300"
               />
             </div>
+
+            {/* Category Filter */}
             <div className="relative">
               <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5 transition-colors duration-300" />
               <select
@@ -79,6 +111,8 @@ export const Courses: React.FC<CoursesProps> = ({
                 ))}
               </select>
             </div>
+
+            {/* Difficulty Filter */}
             <div>
               <select
                 value={selectedDifficulty}
@@ -94,6 +128,7 @@ export const Courses: React.FC<CoursesProps> = ({
           </div>
         </div>
 
+        {/* Results Count */}
         <div className="mb-6">
           <p className="text-gray-600 dark:text-gray-300 transition-colors duration-300">
             Showing {filteredCourses.length} of {courses.length} courses
@@ -108,6 +143,7 @@ export const Courses: React.FC<CoursesProps> = ({
           )}
         </div>
 
+        {/* Courses Grid */}
         {filteredCourses.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredCourses.map((course) => (

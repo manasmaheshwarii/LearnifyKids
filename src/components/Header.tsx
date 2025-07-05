@@ -6,11 +6,13 @@ import { DarkModeToggle } from "./DarkModeToggle";
 interface HeaderProps {
   currentPage: string;
   onPageChange: (page: string) => void;
+  onLogoClick: () => void; // NEW prop for logo click
 }
 
 export const Header: React.FC<HeaderProps> = ({
   currentPage,
   onPageChange,
+  onLogoClick,
 }) => {
   const [showUserMenu, setShowUserMenu] = useState(false);
 
@@ -25,8 +27,12 @@ export const Header: React.FC<HeaderProps> = ({
     <header className="bg-white dark:bg-gray-800 shadow-lg border-b-4 border-purple-200 dark:border-purple-600 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
-          {/* Logo */}
-          <div className="flex items-center space-x-2">
+          {/* Logo - now clickable */}
+          <div
+            className="flex items-center space-x-2 cursor-pointer select-none"
+            onClick={onLogoClick}
+            title="Go to Home"
+          >
             <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
               <Star className="w-6 h-6 text-white" />
             </div>

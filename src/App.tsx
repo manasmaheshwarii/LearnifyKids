@@ -44,6 +44,10 @@ function App() {
     }
   };
 
+  const handleLogoClick = () => {
+    setState({ ...state, currentPage: "home", selectedCategory: undefined });
+  };
+
   const handleCategoryClick = (categoryId: string) => {
     setState({
       ...state,
@@ -137,6 +141,7 @@ function App() {
             onCourseClick={handleCourseClick}
             selectedCategory={state.selectedCategory}
             onCategoryChange={handleCategoryClick}
+            onBack={handleBackToHome}
           />
         );
       case "dashboard":
@@ -223,6 +228,7 @@ function App() {
           <Header
             currentPage={state.currentPage}
             onPageChange={handlePageChange}
+            onLogoClick={handleLogoClick}
           />
         )}
         {renderCurrentPage()}
