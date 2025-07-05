@@ -28,7 +28,7 @@ export const courses: Course[] = [
         id: "saving-vs-spending",
         title: "Saving vs. Spending",
         type: "video",
-        videoUrl: "qDTr2JcKqUE", // Teaching kids about saving money
+        videoUrl: "https://www.youtube.com/watch?v=OITuKu3ky5o", // Teaching kids about saving money
         duration: "10 minutes",
         description: "Learn the difference between saving and spending wisely",
       },
@@ -70,7 +70,7 @@ export const courses: Course[] = [
         id: "how-banks-work",
         title: "How Banks Work",
         type: "video",
-        videoUrl: "MZqkMhyzPwU", // How banks work for kids
+        videoUrl: "https://www.youtube.com/watch?v=dVRGqkxwYQc", // How banks work for kids
         duration: "12 minutes",
         description:
           "Understanding how banks help us save and protect our money",

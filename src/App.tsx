@@ -11,7 +11,7 @@ import { CourseDetail } from "./components/CourseDetail";
 import { VideoPlayer } from "./components/VideoPlayer";
 import { Quiz } from "./components/Quiz";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import { courses } from "./data/courses";
+import { courses as initialCourses } from "./data/courses";
 
 type AppState = {
   currentPage: string;
@@ -22,9 +22,10 @@ type AppState = {
 };
 
 function App() {
+  const [courses, setCourses] = useState(initialCourses);
   const [state, setState] = useState<AppState>({
     currentPage: "home",
-    isAuthenticated: true, // Set to false to show login first
+    isAuthenticated: true,
   });
 
   const handleLogin = () => {
@@ -61,7 +62,23 @@ function App() {
     }
   };
 
+  // UPDATED: Mark module as complete in state
   const handleModuleComplete = () => {
+    setCourses((prevCourses) =>
+      prevCourses.map((course) => {
+        if (course.id === state.selectedCourse) {
+          return {
+            ...course,
+            modules: course.modules.map((module) =>
+              module.id === state.selectedModule
+                ? { ...module, isCompleted: true }
+                : module
+            ),
+          };
+        }
+        return course;
+      })
+    );
     setState({
       ...state,
       currentPage: "course-detail",
@@ -83,7 +100,6 @@ function App() {
     setState({ ...state, currentPage: "courses" });
   };
 
-  // Show login if not authenticated
   if (!state.isAuthenticated) {
     return (
       <ThemeProvider>
