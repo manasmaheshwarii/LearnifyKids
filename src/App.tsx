@@ -19,6 +19,7 @@ type AppState = {
   selectedModule?: string;
   moduleType?: string;
   isAuthenticated: boolean;
+  selectedCategory?: string;
 };
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
   const [state, setState] = useState<AppState>({
     currentPage: "home",
     isAuthenticated: true,
+    selectedCategory: undefined,
   });
 
   const handleLogin = () => {
@@ -36,8 +38,17 @@ function App() {
     if (page === "login") {
       setState({ ...state, isAuthenticated: false, currentPage: "login" });
     } else {
-      setState({ ...state, currentPage: page });
+      setState({ ...state, currentPage: page, selectedCategory: undefined });
     }
+  };
+
+  // NEW: Handle category click to show only that category's courses
+  const handleCategoryClick = (categoryId: string) => {
+    setState({
+      ...state,
+      currentPage: "courses",
+      selectedCategory: categoryId,
+    });
   };
 
   const handleCourseClick = (courseId: string) => {
@@ -62,7 +73,7 @@ function App() {
     }
   };
 
-  // UPDATED: Mark module as complete in state
+  // Mark module as complete in state
   const handleModuleComplete = () => {
     setCourses((prevCourses) =>
       prevCourses.map((course) => {
@@ -97,7 +108,7 @@ function App() {
   };
 
   const handleGetStarted = () => {
-    setState({ ...state, currentPage: "courses" });
+    setState({ ...state, currentPage: "courses", selectedCategory: undefined });
   };
 
   if (!state.isAuthenticated) {
@@ -115,13 +126,19 @@ function App() {
       case "home":
         return (
           <Home
-            onCategoryClick={() => handlePageChange("courses")}
+            onCategoryClick={handleCategoryClick}
             onCourseClick={handleCourseClick}
             onGetStarted={handleGetStarted}
           />
         );
       case "courses":
-        return <Courses onCourseClick={handleCourseClick} />;
+        return (
+          <Courses
+            onCourseClick={handleCourseClick}
+            selectedCategory={state.selectedCategory}
+            onCategoryChange={handleCategoryClick}
+          />
+        );
       case "dashboard":
         return <Dashboard onCourseClick={handleCourseClick} />;
       case "achievements":
@@ -172,7 +189,7 @@ function App() {
       default:
         return (
           <Home
-            onCategoryClick={() => handlePageChange("courses")}
+            onCategoryClick={handleCategoryClick}
             onCourseClick={handleCourseClick}
             onGetStarted={handleGetStarted}
           />

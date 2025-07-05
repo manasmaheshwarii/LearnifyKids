@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Course, Module } from "../types";
+import { Course } from "../types";
 import {
   ArrowLeft,
   Play,
@@ -263,7 +263,6 @@ export const CourseDetail: React.FC<CourseDetailProps> = ({
                 <div>
                   <div className="flex justify-between text-sm mb-1 text-gray-600 dark:text-gray-400 transition-colors duration-300">
                     <span>Overall Progress</span>
-                    {/* You can calculate actual progress here if needed */}
                     <span>
                       {Math.round(
                         (course.modules.filter((m) => m.isCompleted).length /
