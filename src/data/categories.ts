@@ -46,7 +46,8 @@ export const categories: Category[] = [
   {
     id: "life-skills",
     name: "Life Skills",
-    description: "First aid, cooking, cleaning, and organization",
+    description:
+      "First aid, cooking, cleaning, and organization. Get essential life skills!",
     icon: "Home",
     color: "bg-gradient-to-r from-yellow-500 to-orange-600",
     courseCount: 5,
@@ -62,7 +63,7 @@ export const categories: Category[] = [
   {
     id: "creativity",
     name: "Creativity & Expression",
-    description: "Drawing, design, music, and crafts",
+    description: "Drawing, design, music, and crafts. Enhance your creativity!",
     icon: "Palette",
     color: "bg-gradient-to-r from-pink-400 to-purple-500",
     courseCount: 4,
